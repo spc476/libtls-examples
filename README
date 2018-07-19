@@ -1,0 +1,36 @@
+
+  This is some code I wrote to get familiar with using libtls, a sane and
+relatively easy library to use.  I'm impressed with it.  All the programs
+have the same command line parameters:  the first is the hostname to
+connect to, and the second is the resource you want to obtain.  For instance,
+to get the main page from <https://www.google.com/> you would do:
+
+	GenericUnixPrompt> ./get1 www.google.com /
+
+  All the programs assume port 443 for https:---adding support for port
+overriding and maybe even parsing a URL is left as an exercise for the
+reader.
+
+get1.c
+
+	Just a straightforward program to obtain a webpage from a secure
+	website.  It uses blocking I/O, and is the minimum you need to
+	obtain a webpage from a secure site.
+
+get2.c
+
+	This program will explicitly create the socket, then call connect()
+	to establish a TCP connection.  It then uses said socket to initiate
+	a secure connection via the tls_connect_cbs() function.  The custom
+	read and write functions will read data directly from the socket,
+	and dump the contents to some files (input.bin and output.bin for
+	input and output respectively).
+
+get3.c
+
+	This is a proof-of-concept using non-blocking I/O to simulate use in
+	an evented architecture (although it's not fully evented).  This
+	also uses tls_connect_cbs() with custom read/write functions which
+	should be enough to show how it would be done in a real evented
+	system.
+
