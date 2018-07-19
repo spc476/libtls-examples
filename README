@@ -34,3 +34,7 @@ get3.c
 	should be enough to show how it would be done in a real evented
 	system.
 
+	A real evented system would buffer the input from the network to
+	minimize the number of system calls made.  I just wanted something
+	simple to prove it would work, and not obscure the details behind a
+	bunch of abstractions---this is a demo after all.
