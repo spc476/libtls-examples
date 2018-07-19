@@ -37,8 +37,6 @@
 struct tls_config *g_config = NULL;
 struct tls        *g_tls    = NULL;
 int                g_sock   = -1;
-FILE              *g_fpin   = NULL;
-FILE              *g_fpout  = NULL;
 
 /***********************************************************************/
 
@@ -52,8 +50,6 @@ static void cleanup(void)
   
   if (g_config != NULL) tls_config_free(g_config);
   if (g_sock   != -1)   close(g_sock);
-  if (g_fpout  != NULL) fclose(g_fpout);
-  if (g_fpin   != NULL) fclose(g_fpin);
 }
 
 /***********************************************************************/
@@ -126,8 +122,6 @@ static ssize_t cb_read(struct tls *ctx,void *buf,size_t buflen,void *usr)
   {
     wait_for_io(*psock,"read");
     in = read(*psock,buf,buflen);
-    if (in > 0)
-      fwrite(buf,1,(unsigned)in,g_fpin);
     if ((in < 0) && (errno == EAGAIN))
       continue;
     return in;
@@ -147,8 +141,6 @@ static ssize_t cb_write(struct tls *ctx,void const *buf,size_t buflen,void *usr)
   {
     wait_for_io(*psock,"write");
     out = write(*psock,buf,buflen);
-    if (out > 0)
-      fwrite(buf,1,(unsigned)out,g_fpout);
     if ((out < 0) && (errno == EAGAIN))
       continue;
     return out;
@@ -172,20 +164,6 @@ int main(int argc,char *argv[])
   }
   
   atexit(cleanup);
-  
-  g_fpin = fopen("input.bin","wb");
-  if (g_fpin == NULL)
-  {
-    perror("input.bin");
-    return EXIT_FAILURE;
-  }
-  
-  g_fpout = fopen("output.bin","wb");
-  if (g_fpout == NULL)
-  {
-    perror("output.bin");
-    return EXIT_FAILURE;
-  }
   
   if (tls_init() < 0)
   {
