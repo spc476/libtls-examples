@@ -20,7 +20,6 @@
 *
 *************************************************************************/
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,13 +32,13 @@ struct tls        *g_tls    = NULL;
 
 void cleanup(void)
 {
-  if (g_tls)
+  if (g_tls != NULL)
   {
     tls_close(g_tls);
     tls_free(g_tls);
   }
   
-  if (g_config) tls_config_free(g_config);
+  if (g_config != NULL) tls_config_free(g_config);
 }
 
 /***********************************************************************/
