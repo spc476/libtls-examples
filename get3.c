@@ -84,7 +84,7 @@ static int connect_to_host(char const *host,char const *port)
   rc = connect(sock,results->ai_addr,results->ai_addrlen);
   if ((rc == -1) && (errno == EINPROGRESS))
     return sock;
-  
+    
   freeaddrinfo(results);
   close(sock);
   return -1;
@@ -134,7 +134,7 @@ static ssize_t cb_write(struct tls *ctx,void const *buf,size_t buflen,void *usr)
 {
   ssize_t  out;
   int     *psock = usr;
-
+  
   (void)ctx;
   
   while(1)
