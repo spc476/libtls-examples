@@ -21,14 +21,15 @@
 ########################################################################
 
 CC      = gcc -std=c99 -Wall -Wextra -pedantic
-CFLAGS  = -g -I$(HOME)/JAIL/include
+CFLAGS  = -g -I$(HOME)/JAIL/include -D_GNU_SOURCE
 LDFLAGS = -g -L$(HOME)/JAIL/lib -Wl,-rpath,$(HOME)/JAIL/lib
 LDLIBS  = -ltls
 
-.PHONY: clean
+.PHONY: all clean
 
-get :
+all : get get2
 
 clean :
 	$(RM) $(shell find . -name '*~')
-	$(RM) get
+	$(RM) $(shell find . -name '*.bin')
+	$(RM) get get2
