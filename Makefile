@@ -21,6 +21,10 @@
 ########################################################################
 
 CC      = gcc -std=c99 -Wall -Wextra -pedantic
+
+# My setup is a special snowflake.  In reality, I didn't want to
+# overwrite any existing OpenSSL stuff
+
 CFLAGS  = -g -I$(HOME)/JAIL/include -D_GNU_SOURCE
 LDFLAGS = -g -L$(HOME)/JAIL/lib -Wl,-rpath,$(HOME)/JAIL/lib
 LDLIBS  = -ltls
