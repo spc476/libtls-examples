@@ -27,9 +27,9 @@ LDLIBS  = -ltls
 
 .PHONY: all clean
 
-all : get get2
+all : get get2 get3
 
 clean :
 	$(RM) $(shell find . -name '*~')
 	$(RM) $(shell find . -name '*.bin')
-	$(RM) get get2
+	$(RM) get get2 get3
