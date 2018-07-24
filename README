@@ -38,3 +38,22 @@ get3.c
 	minimize the number of system calls made.  I just wanted something
 	simple to prove it would work, and not obscure the details behind a
 	bunch of abstractions---this is a demo after all.
+
+Lua/get1.c
+
+	Same as get1.c, only in Lua.  It uses a currently unpublished
+	Lua module I'm working on (as do all the Lua versions).
+
+Lua/get2.c
+
+	Same as get2.c, only in Lua.
+
+Lua/get3.c
+
+	Same as get3.c, only in Lua.  Also, misleading, because you cannot
+	call coroutine.yield() in the callback functions as I indicate.
+	I only found this out the hard way.
+
+Lua/get4.c
+
+	An implementation that actually works with coroutines in Lua.
