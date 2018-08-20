@@ -23,7 +23,7 @@
 -- *****************************************************************
 -- luacheck: ignore 611
 
-local tls = require "org.flummux.tls"
+local tls = require "org.conman.tls"
 local net = require "org.conman.net"
 
 local g_fpin  = io.open("input.bin","wb")

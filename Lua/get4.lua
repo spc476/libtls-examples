@@ -23,7 +23,7 @@
 -- *****************************************************************
 -- luacheck: ignore 611
 
-local tls   = require "org.flummux.tls"
+local tls   = require "org.conman.tls"
 local net   = require "org.conman.net"
 local poll  = require "org.conman.pollset"()
 local errno = require "org.conman.errno"
