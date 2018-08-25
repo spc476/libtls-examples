@@ -17,7 +17,7 @@
 --
 -- Comments, questions and criticisms can be sent to: sean@conman.org
 --
--- This program demonstrates the use of TLS in Lua.  TLS is handling 
+-- This program demonstrates the use of TLS in Lua.  TLS is handling
 -- the network connection on our behalf.
 --
 -- *****************************************************************
