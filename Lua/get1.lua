@@ -70,7 +70,7 @@ end
 local config = tls.config()
 local ctx    = tls.client()
 
-okay(config,config:set_protocols "all")
+okay(config,config:protocols "all")
 okay(ctx,ctx:configure(config))
 okay(ctx,ctx:connect(arg[1],"https"))
 okay(ctx,write(ctx,string.format(

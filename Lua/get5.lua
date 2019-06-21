@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
 local tls = require "org.conman.tls"
-local url = require "org.conman.parsers.url.url"
+local url = require "org.conman.parsers.url"
 
 -- ************************************************************
 
@@ -40,7 +40,6 @@ end
 
 ctx:handshake()
 
-
 io.stderr:write(
 	format_request("GET",loc.path) ..
 	format_headers {
@@ -53,14 +52,14 @@ io.stderr:write(
 )
 
 io.stderr:write("Version:    " , ctx:conn_version() or "","\n")
-io.stderr:write("Subject:    " , ctx:peer_cert_subject(),"\n")
-io.stderr:write("Issuer:     " , ctx:peer_cert_issuer(),"\n")
-io.stderr:write("Cipher:     " , ctx:conn_cipher(),"\n")
+io.stderr:write("Subject:    " , ctx:peer_cert_subject() or "","\n")
+io.stderr:write("Issuer:     " , ctx:peer_cert_issuer() or "","\n")
+io.stderr:write("Cipher:     " , ctx:conn_cipher() or "","\n")
 io.stderr:write("ALPN:       " , ctx:conn_alpn_selected() or "","\n")
-io.stderr:write("Server:     " , ctx:conn_servername(),"\n")
+io.stderr:write("Server:     " , ctx:conn_servername() or "","\n")
 io.stderr:write("Not-Before: " , os.date("%c",ctx:peer_cert_notbefore()),"\n")
 io.stderr:write("Not-After:  " , os.date("%c",ctx:peer_cert_notafter()),"\n")
-io.stderr:write("Hash:       " , ctx:peer_cert_hash(),"\n")
+io.stderr:write("Hash:       " , ctx:peer_cert_hash() or "","\n")
 io.stderr:write("\n")
 
 ctx:write(
@@ -78,4 +77,3 @@ repeat
   local bytes = ctx:read(tls.BUFFERSIZE)
   io.stdout:write(bytes)
 until bytes == ""
-

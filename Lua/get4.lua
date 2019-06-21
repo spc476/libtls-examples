@@ -135,7 +135,7 @@ local function process()
   local config = tls.config()
   local ctx    = tls.client()
 
-  okay(config,config:set_protocols "all")
+  okay(config,config:protocols "all")
   okay(ctx,ctx:configure(config))
 
   local sock = okay(ctx,connect_to_host(arg[1],"https"))
